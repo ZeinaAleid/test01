@@ -1,19 +1,41 @@
-function createStudent(name, age, mark) {
-  return { sname: name, sage: age, smark: mark };
-}
-let s1 = createStudent("x", 19, 98);
-let s2 = createStudent("y", 8, 90);
-let s3 = createStudent("z", 16, 50);
-let s4 = createStudent("n", 18, 49);
-let s5 = createStudent("m", 18, 37);
-let students = [s1, s2, s3, s4, s5];
-let successstudents = [];
-let faildstudents = [];
-for (i = 0; i < 5; i++) {
-  if (students[i].smark >= 50) successstudents.push(students[i].sname);
-  else faildstudents.push(students[i].sname);
-}
-console.log("Success Students:");
-console.log(successstudents);
-console.log("Failed Students:");
-console.log(faildstudents);
+const express = require("express");
+const { request } = require("http");
+const app = express();
+
+const fortunes = [
+  "You will have a great day! 😊",
+  "A surprise gift is on its way! 🎁",
+  "Adventure is waiting for you! 🏕️",
+  "Success is closer than you think! 🚀",
+  "Happiness comes from within! 💛",
+];
+
+const jokes = [
+  "Why don’t skeletons fight each other? They don’t have the guts! 😂",
+  "Why did the math book look sad? Because it had too many problems. 📖",
+  "Parallel lines have so much in common. It’s a shame they’ll never meet. 😆",
+];
+
+const facts = [
+  "Did you know? Honey never spoils! 🍯",
+  "Bananas are berries, but strawberries aren't! 🍌🍓",
+  "Octopuses have three hearts! 🐙",
+];
+
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
+
+app.get("/fortune", (req, res) => {
+  res.send(fortunes[Math.floor(Math.random() * 5)]);
+});
+app.get("/joke", (req, res) => {
+  res.send(jokes[Math.floor(Math.random() * 3)]);
+});
+app.get("/fact", (req, res) => {
+  res.send(facts[Math.floor(Math.random() * 3)]);
+});
+
+app.listen(3000, () => {
+  console.log("listen on port 3000");
+});
